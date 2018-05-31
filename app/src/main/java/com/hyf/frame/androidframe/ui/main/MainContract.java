@@ -1,10 +1,12 @@
 package com.hyf.frame.androidframe.ui.main;
 
-import com.hyf.frame.androidframe.beans.MobResult;
-import com.hyf.frame.androidframe.entities.CookResult;
+import com.hyf.frame.androidframe.beans.DeviceList;
+import com.hyf.frame.androidframe.beans.HttpResult;
+import com.hyf.frame.androidframe.entities.DeviceInfo;
 import com.hyf.frame.androidframe.ui.BaseModel;
-import com.hyf.frame.androidframe.ui.BasePresenter;
 import com.hyf.frame.androidframe.ui.BaseView;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -15,14 +17,10 @@ import io.reactivex.Observable;
 public interface MainContract {
 
     interface Model extends BaseModel {
-        Observable<MobResult<CookResult>> getCookCategory();
-    }
-
-    interface Presenter extends BasePresenter {
-        void getCookCategory();
+        Observable<HttpResult<List<DeviceInfo>>> getDevices(DeviceList deviceList);
     }
 
     interface View extends BaseView {
-        void getCookCategory(CookResult cookResult);
+
     }
 }

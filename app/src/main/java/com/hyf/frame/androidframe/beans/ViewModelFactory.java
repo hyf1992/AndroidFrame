@@ -1,6 +1,5 @@
 package com.hyf.frame.androidframe.beans;
 
-import android.app.Application;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
@@ -8,34 +7,43 @@ import android.support.annotation.NonNull;
 import com.hyf.frame.androidframe.ui.BaseModel;
 import com.hyf.frame.androidframe.ui.login.LoginModel;
 import com.hyf.frame.androidframe.ui.login.LoginViewModel;
+import com.hyf.frame.androidframe.ui.main.MainModel;
+import com.hyf.frame.androidframe.ui.main.MainViewModel;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     private static volatile ViewModelFactory INSTANCE;
 
-    private final BaseModel model;
+    private BaseModel model;
 
+    private ViewModelFactory() {
 
-    public static ViewModelFactory getInstance(BaseModel model) {
+    }
 
+    public static ViewModelFactory getInstance() {
         if (INSTANCE == null) {
             synchronized (ViewModelFactory.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new ViewModelFactory(model);
+                    INSTANCE = new ViewModelFactory();
                 }
             }
         }
         return INSTANCE;
     }
 
-
-    private ViewModelFactory(BaseModel model) {
+    public ViewModelFactory setModel(BaseModel model) {
         this.model = model;
+        return this;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(LoginViewModel.class)) {
+        if (model == null)
+            throw new IllegalArgumentException("model can not null");
+        if (modelClass.isAssignableFrom(MainViewModel.class)) {
+            //noinspection unchecked
+            return (T) new MainViewModel((MainModel) model);
+        } else if (modelClass.isAssignableFrom(LoginViewModel.class)) {
             //noinspection unchecked
             return (T) new LoginViewModel((LoginModel) model);
         }

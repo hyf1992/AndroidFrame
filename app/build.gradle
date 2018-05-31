@@ -28,11 +28,12 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //rxJava
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
@@ -58,8 +59,15 @@ dependencies {
     //implementation('com.tencent.tinker:tinker-android-lib:1.9.1')
     //工具类
     implementation 'com.blankj:utilcode:1.8.1'
+    //live
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+    //ImmersionBar
+    implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
+    //
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.38'
+
     implementation project(':animation-hyf')
     implementation project(':view-hyf')
+
 }

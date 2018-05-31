@@ -1,99 +1,43 @@
 package com.hyf.frame.androidframe.ui.main;
 
-import android.content.Intent;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.hyf.frame.androidframe.R;
-import com.hyf.frame.androidframe.beans.MobResult;
-import com.hyf.frame.androidframe.entities.CookResult;
-import com.hyf.frame.androidframe.entities.User;
-import com.hyf.frame.androidframe.rxjava.ExceptionObserver;
-import com.hyf.frame.androidframe.rxjava.RxSchedulers;
+import com.hyf.frame.androidframe.databinding.ActivityMainBinding;
 import com.hyf.frame.androidframe.ui.BaseActivity;
-import com.hyf.frame.androidframe.ui.animation.AnimationActivity;
-import com.hyf.frame.androidframe.ui.login.LoginActivity;
-import com.hyf.frame.androidframe.utils.LogUtils;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
-import javax.annotation.Nullable;
-import javax.inject.Inject;
-
-import cn.nekocode.rxlifecycle.LifecycleEvent;
-import cn.nekocode.rxlifecycle.RxLifecycle;
-import dagger.android.DaggerActivity;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Interceptor;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
-import okio.Buffer;
-import okio.BufferedSink;
-import okio.BufferedSource;
-import okio.ForwardingSource;
-import okio.Okio;
-import okio.Sink;
-
-
-public class MainActivity extends DaggerActivity implements MainContract.View {
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements MainContract.View {
     private static final String TAG = MainActivity.class.getSimpleName();
-    //private Realm realm;
-    @Inject
-    MainPresenter mainPresenter;
-    private TextView textView;
+    private long firstTime;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        textView = findViewById(R.id.abc);
-        mainPresenter.getCookCategory();
+    protected int getLayout() {
+        return R.layout.activity_main;
     }
 
-    public void changeName(View view) {
-        //testApk();
-        startActivity(new Intent(this, AnimationActivity.class));
-        // 淡入淡出的动画效果
-        //overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    @Override
+    protected void initData() {
 
-        // 从左向右滑动的效果
-        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-
-        //mainPresenter.test();
-        /*Observable.interval(3, TimeUnit.SECONDS)
-                .compose(RxLifecycle.bind(this).<Long>disposeObservableWhen(LifecycleEvent.DESTROY))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long aLong) throws Exception {
-                        ToastUtils.showShort(aLong + "数据");
-                    }
-                });*/
     }
 
-    public void testApk() {
+    @Override
+    public void showError(int code) {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        long secondTime = System.currentTimeMillis();
+        if (secondTime - firstTime < 2000) {
+            super.onBackPressed();
+        } else {
+            ToastUtils.showShort("再按一次退出程序");
+            firstTime = System.currentTimeMillis();
+        }
+    }
+    /*public void testApk() {
         //下载路径，如果路径无效了，可换成你的下载路径
         //final String url = "http://c.qijingonline.com/test.mkv";
         final String url = "http://test-1251233192.coscd.myqcloud.com/1_1.apk";
@@ -128,7 +72,7 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
                 if (response.body() instanceof FileResponseBody) {
 
                 }
-                /*BufferedSink sink = Okio.buffer(Okio.sink(dest));
+                *//*BufferedSink sink = Okio.buffer(Okio.sink(dest));
                 Buffer buffer = sink.buffer();
                 long contentLength = response.body().contentLength();
                 long total = 0;
@@ -143,10 +87,10 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
                     formatProgress(progress);
                 }
                 source.close();
-                sink.close();*/
+                sink.close();*//*
             }
         });
-    }
+    }*/
 
     private long preTime;
 
@@ -162,23 +106,11 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
         }
     }
 
-    @Override
-    public void getCookCategory(CookResult cookResult) {
-        LogUtils.d(TAG, cookResult.getChilds().size() + "长度");
 
-    }
 
-    @Override
-    public void onError(int code) {
 
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    private class FileResponseBody extends ResponseBody{
+    /*private class FileResponseBody extends ResponseBody{
         Response originalResponse;
 
         FileResponseBody(Response originalResponse) {
@@ -209,5 +141,5 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
                 }
             });
         }
-    }
+    }*/
 }

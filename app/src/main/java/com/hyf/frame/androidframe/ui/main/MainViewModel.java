@@ -1,21 +1,20 @@
 package com.hyf.frame.androidframe.ui.main;
 
 
-import android.databinding.BindingAdapter;
-import android.view.View;
+import android.arch.lifecycle.ViewModel;
 
-public class MainViewModel {
-    private int padding = 16;
+import com.hyf.frame.androidframe.dagger.ActivityScope;
 
-    public int getPadding() {
-        return padding;
+@ActivityScope
+public class MainViewModel extends ViewModel implements MainContract.View {
+    private MainModel model;
+
+    public MainViewModel(MainModel model) {
+        this.model = model;
     }
 
-    @BindingAdapter("android:hyf")
-    public static void setPaddingLeft(View view, int padding) {
-        view.setPadding(padding,
-                view.getPaddingTop(),
-                view.getPaddingRight(),
-                view.getPaddingBottom());
+    @Override
+    public void showError(int code) {
+
     }
 }

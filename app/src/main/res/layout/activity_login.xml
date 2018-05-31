@@ -2,9 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="loginViewModel"
-            type="com.hyf.frame.androidframe.ui.login.LoginViewModel"/>
+            type="com.hyf.frame.androidframe.ui.login.LoginViewModel" />
     </data>
 
     <RelativeLayout
@@ -14,12 +15,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@{loginViewModel.cookResult.categoryInfo.name}"/>
+            android:layout_centerInParent="true" />
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="hyf"/>
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 </layout>

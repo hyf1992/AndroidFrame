@@ -21,8 +21,11 @@ import io.reactivex.functions.Function;
  */
 @ActivityScope
 public class LoginModel implements LoginContract.Model {
+    private LoginActivity activity;
+
     @Inject
-    LoginModel() {
+    LoginModel(LoginActivity activity) {
+        this.activity = activity;
     }
 
     @Override

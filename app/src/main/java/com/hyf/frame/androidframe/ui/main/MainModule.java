@@ -1,24 +1,22 @@
 package com.hyf.frame.androidframe.ui.main;
 
+
+import android.arch.lifecycle.ViewModelProviders;
+
+import com.hyf.frame.androidframe.beans.ViewModelFactory;
 import com.hyf.frame.androidframe.dagger.ActivityScope;
 
-import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 
 /**
  * Created by hyf on 2018/3/26.
  */
 @Module
 public abstract class MainModule {
+    @Provides
     @ActivityScope
-    @Binds
-    abstract MainContract.Model model(MainModel mainModel);
-
-    @ActivityScope
-    @Binds
-    abstract MainContract.Presenter presenter(MainPresenter mainPresenter);
-
-    @ActivityScope
-    @Binds
-    abstract MainContract.View view(MainActivity mainActivity);
+    static MainViewModel provideViewModel(MainActivity activity, MainModel model) {
+        return ViewModelProviders.of(activity, ViewModelFactory.getInstance().setModel(model)).get(MainViewModel.class);
+    }
 }

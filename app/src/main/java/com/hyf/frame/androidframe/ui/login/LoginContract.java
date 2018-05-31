@@ -4,7 +4,6 @@ import com.hyf.frame.androidframe.beans.MobResult;
 import com.hyf.frame.androidframe.entities.CookResult;
 import com.hyf.frame.androidframe.entities.User;
 import com.hyf.frame.androidframe.ui.BaseModel;
-import com.hyf.frame.androidframe.ui.BasePresenter;
 import com.hyf.frame.androidframe.ui.BaseView;
 
 import io.reactivex.Observable;
@@ -15,8 +14,7 @@ public interface LoginContract {
         Observable<MobResult<User>> getUser();
     }
 
-    interface Presenter extends BasePresenter {
-        void getUser();
-        void getCookCategory();
+    interface View extends BaseView {
+
     }
 }

@@ -1,17 +1,18 @@
 package com.hyf.frame.androidframe.dagger;
 
-import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 import javax.inject.Scope;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Created by hyf on 2018/3/26.
  */
 @Scope
-@Documented
-@Retention(RUNTIME)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD})
 public @interface FragmentScope {
 }

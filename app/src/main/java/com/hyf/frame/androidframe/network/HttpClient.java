@@ -35,7 +35,7 @@ public class HttpClient {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)
                 .connectTimeout(CONNECT_TIME_OUT, TimeUnit.MILLISECONDS)
-                .addInterceptor(new CommonParamsInterceptor())
+                .addInterceptor(new LoggingInterceptor())
                 .build();
         builder = new Retrofit.Builder().client(okHttpClient)
                 .addConverterFactory(FastJsonConverterFactory.create())
@@ -68,15 +68,4 @@ public class HttpClient {
         return httpServices;
     }
 
-
-    //访问设置参数
-    class CommonParamsInterceptor implements Interceptor {
-        @Override
-        public Response intercept(@NonNull Chain chain) throws IOException {
-            Request request = chain.request();
-            HttpUrl httpUrl = request.url().newBuilder().addQueryParameter("key", Constants.MOB_APPKEY).build();
-            request = request.newBuilder().addHeader("Content-Type", "application/json").url(httpUrl).build();
-            return chain.proceed(request);
-        }
-    }
 }

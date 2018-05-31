@@ -14,7 +14,7 @@ public abstract class LoginModule {
 
     @Provides
     @ActivityScope
-    static LoginViewModel provideLoginViewModel(LoginActivity loginActivity, LoginModel model) {
-        return ViewModelProviders.of(loginActivity, ViewModelFactory.getInstance(model)).get(LoginViewModel.class);
+    static LoginViewModel provideViewModel(LoginActivity activity, LoginModel model) {
+        return ViewModelProviders.of(activity, ViewModelFactory.getInstance().setModel(model)).get(LoginViewModel.class);
     }
 }
