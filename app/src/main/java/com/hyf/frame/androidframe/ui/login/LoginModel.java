@@ -31,7 +31,7 @@ public class LoginModel implements LoginContract.Model {
     @Override
     public Observable<MobResult<CookResult>> getCookCategory() {
         return HttpClient.getInstance().getDefaultService().getCookCategory()
-                .compose(RxSchedulers.<MobResult<CookResult>>io_main());
+                .compose(RxSchedulers.<MobResult<CookResult>>io_main(activity));
     }
 
     @Override
@@ -39,7 +39,7 @@ public class LoginModel implements LoginContract.Model {
         MobResult<User> mobResult = new MobResult<>();
         mobResult.setResult(new User());
         return Observable.just(mobResult)
-                .compose(RxSchedulers.<MobResult<User>>io_main());
+                .compose(RxSchedulers.<MobResult<User>>io_main(activity));
     }
 
 }

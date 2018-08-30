@@ -107,7 +107,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends ViewMode
     @Override
     protected void onDestroy() {
         unbinder.unbind();
-        RxSchedulers.clear();
+        RxSchedulers.clear(this);
         super.onDestroy();
         if (mImmersionBar != null)
             mImmersionBar.destroy();

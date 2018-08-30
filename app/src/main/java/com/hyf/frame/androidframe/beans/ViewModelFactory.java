@@ -5,10 +5,14 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
 import com.hyf.frame.androidframe.ui.BaseModel;
+import com.hyf.frame.androidframe.ui.behavior.BehaviorModel;
+import com.hyf.frame.androidframe.ui.behavior.BehaviorViewModel;
 import com.hyf.frame.androidframe.ui.login.LoginModel;
 import com.hyf.frame.androidframe.ui.login.LoginViewModel;
 import com.hyf.frame.androidframe.ui.main.MainModel;
 import com.hyf.frame.androidframe.ui.main.MainViewModel;
+import com.hyf.frame.androidframe.ui.search.SearchModel;
+import com.hyf.frame.androidframe.ui.search.SearchViewModel;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     private static volatile ViewModelFactory INSTANCE;
@@ -46,6 +50,12 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         } else if (modelClass.isAssignableFrom(LoginViewModel.class)) {
             //noinspection unchecked
             return (T) new LoginViewModel((LoginModel) model);
+        } else if (modelClass.isAssignableFrom(BehaviorViewModel.class)) {
+            //noinspection unchecked
+            return (T) new BehaviorViewModel((BehaviorModel) model);
+        } else if (modelClass.isAssignableFrom(SearchViewModel.class)) {
+            //noinspection unchecked
+            return (T) new SearchViewModel((SearchModel) model);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

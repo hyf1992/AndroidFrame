@@ -26,7 +26,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.login.LoginActivity" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/login_string" />
+        <activity
+            android:name=".ui.behavior.BehaviorActivity"
+            android:label="@string/login_string" />
+        <activity android:name=".ui.search.SearchActivity" />
 
         <service
             android:name=".services.DownloadService"

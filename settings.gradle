@@ -1,1 +1,1 @@
-include ':app', ':view-hyf', ':animation-hyf'
+include ':app', ':view-hyf', ':animation-hyf', ':behavior-hyf'

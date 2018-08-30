@@ -1,14 +1,17 @@
 package com.hyf.frame.androidframe.ui.main;
 
 import android.util.Log;
+import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.hyf.frame.androidframe.R;
 import com.hyf.frame.androidframe.databinding.ActivityMainBinding;
 import com.hyf.frame.androidframe.ui.BaseActivity;
+import com.hyf.frame.androidframe.ui.behavior.BehaviorActivity;
+import com.hyf.frame.androidframe.ui.search.SearchActivity;
 
 
-public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements MainContract.View {
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> {
     private static final String TAG = MainActivity.class.getSimpleName();
     private long firstTime;
 
@@ -22,9 +25,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     }
 
-    @Override
-    public void showError(int code) {
-
+    public void onViewClicked(View view) {
+        skipActivity(BehaviorActivity.class);
     }
 
     @Override
@@ -37,6 +39,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             firstTime = System.currentTimeMillis();
         }
     }
+
     /*public void testApk() {
         //下载路径，如果路径无效了，可换成你的下载路径
         //final String url = "http://c.qijingonline.com/test.mkv";

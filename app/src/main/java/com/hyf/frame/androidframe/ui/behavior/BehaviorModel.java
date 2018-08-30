@@ -1,4 +1,4 @@
-package com.hyf.frame.androidframe.ui.main;
+package com.hyf.frame.androidframe.ui.behavior;
 
 
 import com.hyf.frame.androidframe.beans.DeviceList;
@@ -18,17 +18,11 @@ import io.reactivex.Observable;
  * Created by hyf on 2018/3/26.
  */
 @ActivityScope
-public class MainModel implements MainContract.Model {
-    private MainActivity activity;
+public class BehaviorModel implements BehaviorContract.Model {
+    private BehaviorActivity activity;
 
     @Inject
-    MainModel(MainActivity activity) {
+    BehaviorModel(BehaviorActivity activity) {
         this.activity = activity;
-    }
-
-    @Override
-    public Observable<HttpResult<List<DeviceInfo>>> getDevices(DeviceList deviceList) {
-        return HttpClient.getInstance().getDefaultService().getDevices(deviceList)
-                .compose(RxSchedulers.io_main(activity));
     }
 }
